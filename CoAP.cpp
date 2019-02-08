@@ -122,6 +122,22 @@ uint16_t Coap::put(char *host, int port, char *url, char *payload, int payloadle
     return this->send(host, port, url, COAP_CON, COAP_PUT, NULL, 0, (uint8_t *)payload, payloadlen);
 }
 
+uint16_t Coap::post(IPAddress ip, int port, char *url, char *payload) {
+    return this->send(ip, port, url, COAP_CON, COAP_POST, NULL, 0, (uint8_t *)payload, strlen(payload));
+}
+
+uint16_t Coap::post(IPAddress ip, int port, char *url, char *payload, int payloadlen) {
+    return this->send(ip, port, url, COAP_CON, COAP_POST, NULL, 0, (uint8_t *)payload, payloadlen);
+}
+
+uint16_t Coap::post(char *host, int port, char *url, char *payload) {
+    return this->send(host, port, url, COAP_CON, COAP_POST, NULL, 0, (uint8_t *)payload, strlen(payload));
+}
+
+uint16_t Coap::post(char *host, int port, char *url, char *payload, int payloadlen) {
+    return this->send(host, port, url, COAP_CON, COAP_POST, NULL, 0, (uint8_t *)payload, payloadlen);
+}
+
 uint16_t Coap::send(char *host, int port, char *url, COAP_TYPE type, COAP_METHOD method, uint8_t *token, uint8_t tokenlen, uint8_t *payload, uint32_t payloadlen) {
     int ret = 0;
     DNSClient *dns;
