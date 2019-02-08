@@ -29,6 +29,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #ifndef __SIMPLE_COAP_H__
 #define __SIMPLE_COAP_H__
 
+#define SERVER_IP "45.77.40.195"
+#define SERVER_PORT 5683
+
 #include "Udp.h"
 
 #define MAX_CALLBACK 10
@@ -204,6 +207,9 @@ class Coap {
         uint16_t send(IPAddress ip, int port, char *url, COAP_TYPE type, COAP_METHOD method, uint8_t *token, uint8_t tokenlen, uint8_t *payload, uint32_t payloadlen);
         uint16_t send(char *host, int port, char *url, COAP_TYPE type, COAP_METHOD method, uint8_t *token, uint8_t tokenlen, uint8_t *payload, uint32_t payloadlen);
 
+        void iSYNC_POST(String,String);
+        void iSYNC_GET(String);
+    
         bool loop();
 };
 
