@@ -370,3 +370,12 @@ uint16_t Coap::sendResponse(IPAddress ip, int port, uint16_t messageid, char *pa
 
     return this->sendPacket(packet, ip, port);
 }
+
+void Coap::iSYNC_POST(String key,String msg){
+    key = "NBIoT/"+key;
+    this->post(SERVER_IP, SERVER_PORT, key.c_str(),msg.c_str());
+}
+void Coap::iSYNC_GET(String key){
+    key = "NBIoT/"+key;
+    this->get(SERVER_IP, SERVER_PORT, key.c_str());
+}
