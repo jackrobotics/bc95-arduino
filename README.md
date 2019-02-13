@@ -1,4 +1,4 @@
-# iSYNC_BC95_Arduino forked from bc95-arduino
+# iSYNC_BC95_Arduino [fork from bc95-arduino]
 
 UDP client library ที่พัฒนาขึ้นเพื่ออำนวยความสะดวกในการใช้งาน BC95 NB-IOT module ทำให้ไม่จำเป็นต้องเขียนโปรแกรมติดต่อ AT command เอง 
 ในขณะเดียวกัน API สำหรับใช้งานถูกสร้างขึ้นตามแบบอย่างของ Arduino UDP class ทำให้สามารถนำไปใช้เป็น UDP stack ของ protocol library อื่นๆของ Arduino ได้เลย เช่น DNS, NTP และ CoAP
