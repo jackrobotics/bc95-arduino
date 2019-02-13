@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <AltSoftSerial.h>
-#include "BC95Udp.h"
-#include "CoAP.h"
+#include <BC95Udp.h>
+#include <CoAP.h>
 
 AltSoftSerial bc95serial;
 
