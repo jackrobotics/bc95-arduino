@@ -29,7 +29,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #ifndef __SIMPLE_COAP_H__
 #define __SIMPLE_COAP_H__
 
-#define SERVER_IP "45.77.40.195"
+#define SERVER_IP "coap.isync.pro"
+
 #define SERVER_PORT 5683
 
 #include "Udp.h"

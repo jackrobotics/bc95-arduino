@@ -45,7 +45,7 @@ long lasttime = millis();
 void loop() {
     coap.loop();
     if(millis()-lasttime > 5000){
-      lasttime = millis();
-      coap.iSYNC_GET(iSYNC_KEY);
+        lasttime = millis();
+        coap.iSYNC_GET(iSYNC_KEY);
     }
 }

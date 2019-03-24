@@ -45,10 +45,15 @@ long lasttime = millis();
 void loop() {
     coap.loop();
     if(millis()-lasttime > 5000){
-      lasttime = millis();
-      String Temperature=String(random(0,100));
-      String Humidity=String(random(0,100));
-      String payload="{\"Temperature\":"+Temperature+",\"Humidity\":"+Humidity+"}";
-      coap.iSYNC_POST(iSYNC_KEY,payload);
+        lasttime = millis();
+        String Temperature=String(random(0,100));
+        String Humidity=String(random(0,100));
+        String payload="{\"Temperature\":"+Temperature+",\"Humidity\":"+Humidity+"}";
+
+        Serial.println("#iSYNC <- NBIoT");
+        Serial.print("#DATA : ");
+        Serial.println(payload);
+        coap.iSYNC_POST(iSYNC_KEY,payload);
+        Serial.println("#----------------------------");
     }
 }
