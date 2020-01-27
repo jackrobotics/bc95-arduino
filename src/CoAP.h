@@ -176,6 +176,8 @@ class Coap {
         uint16_t sendPacket(CoapPacket &packet, IPAddress ip, int port);
         int parseOption(CoapOption *option, uint16_t *running_delta, uint8_t **buf, size_t buflen);
 
+        bool ready;
+
     public:
         Coap(
             UDP& udp

@@ -8,7 +8,7 @@ AltSoftSerial bc95serial;
 BC95UDP udp;
 Coap coap(udp);
 
-#define iSYNC_KEY "5c5d82fa3860984ee2a93ba3"
+#define iSYNC_KEY "5c888df67f56637c67cac702"
 
 void responseHandler(CoapPacket *packet, IPAddress remoteIP, int remotePort) {
     char buff[6];
@@ -35,6 +35,8 @@ void setup() {
         delay(1000);
     }
     Serial.println(F("NB-IOT attached.."));
+    Serial.print("IP: ");
+    Serial.println(BC95.getIPAddress());
 
     coap.response(responseHandler);
     coap.start();

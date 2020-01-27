@@ -7,15 +7,18 @@
 Coap::Coap(UDP& udp) {
     this->_udp = &udp;
     this->resp = NULL;
+    this->ready = false;
 }
 
 bool Coap::start() {
     this->start(COAP_DEFAULT_PORT);
+    this->ready=true;
     return true;
 }
 
 bool Coap::start(int port) {
     this->_udp->begin(port);
+    this->ready=true;
     return true;
 }
 
@@ -294,6 +297,7 @@ bool Coap::loop() {
             #if COAP_ENABLE_ACK_CALLBACK == 1
                 if (resp != NULL)
                     resp(packet, _udp->remoteIP(), _udp->remotePort());
+                    ready = true;
             #endif
         } else {
 
@@ -374,8 +378,22 @@ uint16_t Coap::sendResponse(IPAddress ip, int port, uint16_t messageid, char *pa
 void Coap::iSYNC_POST(String key,String msg){
     key = "NBIoT/"+key;
     this->post(SERVER_IP, SERVER_PORT, key.c_str(),msg.c_str());
+    this->ready=false;
+    unsigned long lasttime = millis();
+    while((millis() - lasttime > 10000) && !this->ready){this->loop();};
+    if(millis()-lasttime>10000){
+        Serial.println("Timeout!!!");
+        this->ready=true;
+    }
 }
 void Coap::iSYNC_GET(String key){
     key = "NBIoT/"+key;
     this->get(SERVER_IP, SERVER_PORT, key.c_str());
+    this->ready=false;
+    unsigned long lasttime = millis();
+    while((millis() - lasttime > 10000) && !this->ready){this->loop();};
+    if(millis()-lasttime>10000){
+        Serial.println("Timeout!!!");
+        this->ready=true;
+    }
 }
