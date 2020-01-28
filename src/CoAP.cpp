@@ -376,24 +376,36 @@ uint16_t Coap::sendResponse(IPAddress ip, int port, uint16_t messageid, char *pa
 }
 
 void Coap::iSYNC_POST(String key,String msg){
+    unsigned long lasttime = millis();
     key = "NBIoT/"+key;
     this->post(SERVER_IP, SERVER_PORT, key.c_str(),msg.c_str());
     this->ready=false;
-    unsigned long lasttime = millis();
-    while((millis() - lasttime > 10000) && !this->ready){this->loop();};
-    if(millis()-lasttime>10000){
-        Serial.println("Timeout!!!");
+    while((millis() - lasttime < 10000) && !this->ready){this->loop();};
+    if(!this->ready){
+        Serial.print(F("Reconnect..."));
+        while (!BC95.attachNetwork()) {
+            Serial.print(".");
+            delay(500);
+        }
+        Serial.println();
+        this->start();
         this->ready=true;
     }
 }
 void Coap::iSYNC_GET(String key){
+    unsigned long lasttime = millis();
     key = "NBIoT/"+key;
     this->get(SERVER_IP, SERVER_PORT, key.c_str());
     this->ready=false;
-    unsigned long lasttime = millis();
-    while((millis() - lasttime > 10000) && !this->ready){this->loop();};
-    if(millis()-lasttime>10000){
-        Serial.println("Timeout!!!");
+    while((millis() - lasttime < 10000) && !this->ready){this->loop();};
+    if(!this->ready){
+        Serial.print(F("Reconnect..."));
+        while (!BC95.attachNetwork()) {
+            Serial.print(".");
+            delay(500);
+        }
+        Serial.println();
+        this->start();
         this->ready=true;
     }
 }
