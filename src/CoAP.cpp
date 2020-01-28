@@ -383,6 +383,7 @@ void Coap::iSYNC_POST(String key,String msg){
     while((millis() - lasttime < 10000) && !this->ready){this->loop();};
     if(!this->ready){
         Serial.print(F("Reconnect..."));
+        BC95.reset();
         while (!BC95.attachNetwork()) {
             Serial.print(".");
             delay(500);
@@ -400,6 +401,7 @@ void Coap::iSYNC_GET(String key){
     while((millis() - lasttime < 10000) && !this->ready){this->loop();};
     if(!this->ready){
         Serial.print(F("Reconnect..."));
+        BC95.reset();
         while (!BC95.attachNetwork()) {
             Serial.print(".");
             delay(500);
